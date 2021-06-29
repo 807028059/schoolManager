@@ -9,43 +9,42 @@ $(function () {
 });
 
 function getClassList() {
-    var url = "/schoolManager/clazz/getClazz";
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: {
-            pageNum:1,
-            pageSize:10
-        },
-        dataType: "json",
-        contentType: "application/json",
-        success: function (res) {
-            showTable(res);
-        },
-        error: function(xhr) {
-            console.error("ERROR：" + url + ", xhr.status:" + xhr.status + ", xhr.statusText:" + xhr.statusText);
+    var param = {
+        pageNum: 1,
+        pageSize: 10,
+        grade: "1",
+        clazz: "1"
+    };
+    ajaxPost(param, "/schoolManager/clazz/getClazz", function (res) {
+        if (res.resCode == "0") {
+            var results = res.busiResp.records;
+            if (results.length == 0) {
+                $("#noData").show();
+                $("#fenye").html("");
+                return false;
+            }
+            TotalCount = res.busiResp.total;
+            if (isFinshInit) {     // true 已完成第一次加载
+                appendToTable(results)
+            } else {                 // false 第一次加载
+                appendToTable(results)
+                showingAppPages(pageSize, pageNum);
+            }
+
         }
     });
 }
 
-function showTable(res) {
-    console.log(res);
-    if (data.retCode == "0") {
-        var results = data.object.list;
-        if (results.length == 0) {
-            $("#noData").show();
-            $("#messageListTable").append(headListTMPL());
-            $("#fenye").html("");
-            return false;
-        }
-        TotalCount = data.object.total;
-        if (isFinshInit) {     // true 已完成第一次加载
-            appendToTable(results)
-        } else {                 // false 第一次加载
-            appendToTable(results)
-            showingAppPages(pageSize, pageNum);
-        }
-
+function appendToTable(results) {
+    var html = "";
+    for (var i = 0; i < results.length; i++) {
+        html += "<tr>" +
+            "   <th scope='row'>" + (i + 1) + "</th>" +
+            "   <td>" + results[i].grade + "</td>" +
+            "   <td>" + results[i].clazz + "</td>" +
+            "   <td>" + results[i].status + "</td>" +
+            "   <td>查看</td>" +
+            "   </tr>";
     }
 }
 

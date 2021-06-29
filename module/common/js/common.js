@@ -33,7 +33,9 @@ function ajaxPost(param, url, callBack) {
     $.ajax({
         type: "POST",
         url: url,
-        data: $.param(param, true),
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "application/json",
         success: callBack,
         error: function(xhr) {
             console.error("ERROR：" + url + ", xhr.status:" + xhr.status + ", xhr.statusText:" + xhr.statusText);
