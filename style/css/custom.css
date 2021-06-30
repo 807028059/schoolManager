@@ -6,4 +6,16 @@
     text-align: right !important;
 }
 
+.search-self {
+    /* position: absolute; */
+    width: 50px;
+    height: 30px;
+    padding-top: 10px;
+    padding-left: 15px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
 

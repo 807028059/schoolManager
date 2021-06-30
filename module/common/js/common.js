@@ -6,6 +6,16 @@ $(".indexMenu li").on('click', function (e) {
 });
 
 
+// 由映射关系获取值
+function returnMapping(objMap,keyValue,defaultValue) {
+    for(var key in objMap){
+        if(key==keyValue){
+            return objMap[key]
+        }
+    }
+    return defaultValue;
+}
+
 /**
  * 公用方法：使用AJAX获取数据
  * @param {[type]} param [参数]
@@ -16,7 +26,9 @@ function ajaxGet(param, url, callBack) {
     $.ajax({
         type: "GET",
         url: url,
-        data: $.param(param, true),
+        data: JSON.stringify(param),
+        dataType: "json",
+        contentType: "application/json",
         success: callBack,
         error: function(xhr) {
             console.error("ERROR：" + url + ", xhr.status:" + xhr.status + ", xhr.statusText:" + xhr.statusText);
