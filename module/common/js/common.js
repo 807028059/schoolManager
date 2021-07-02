@@ -23,15 +23,18 @@ function returnMapping(objMap,keyValue,defaultValue) {
  * @param {[type]} callBack [成功的回调函数]
  */
 function ajaxGet(param, url, callBack) {
+    param = param == ""?"":JSON.stringify(param);
     $.ajax({
         type: "GET",
         url: url,
-        data: JSON.stringify(param),
+        data: param,
         dataType: "json",
         contentType: "application/json",
         success: callBack,
         error: function(xhr) {
-            console.error("ERROR：" + url + ", xhr.status:" + xhr.status + ", xhr.statusText:" + xhr.statusText);
+            swal("哦呦，出错啦", {
+                icon: "error",
+            });
         }
     });
 }
@@ -42,15 +45,18 @@ function ajaxGet(param, url, callBack) {
  * @param {[type]} callBack [成功的回调函数]
  */
 function ajaxPost(param, url, callBack) {
+    param = param == ""?"":JSON.stringify(param);
     $.ajax({
         type: "POST",
         url: url,
-        data: JSON.stringify(param),
+        data: param,
         dataType: "json",
         contentType: "application/json",
         success: callBack,
         error: function(xhr) {
-            console.error("ERROR：" + url + ", xhr.status:" + xhr.status + ", xhr.statusText:" + xhr.statusText);
+            swal("哦呦，出错啦", {
+                icon: "error",
+            });
         }
     });
 }

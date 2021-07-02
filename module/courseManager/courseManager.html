@@ -1,7 +1,7 @@
 <!-- Breadcrumb-->
 <div class="breadcrumb-holder container-fluid">
     <ul class="breadcrumb">
-        <li class="breadcrumb-item active">班级管理</li>
+        <li class="breadcrumb-item active">科目管理</li>
     </ul>
 </div>
 <section class="tables">
@@ -13,26 +13,20 @@
                         <h3 class="h4">查询条件</h3>
                     </div>
                     <div class="card-body">
-                        <form class="form-horizontal">
-                            <div class="form-group row">
-                                <label class="search-self">年级</label>
-                                <div class="col-sm-3">
-                                    <select id="searchGrade" class="form-control mb-3"></select>
-                                </div>
-                                <label class="search-self">班级</label>
-                                <div class="col-sm-3 mr-3">
-                                    <select id="searchClazz" class="form-control mb-3"></select>
-                                </div>
-                                <div class="form-group">
-                                    <button onclick="reset()" type="button" class="mr-3 btn btn-secondary">重置</button>
-                                    <button onclick="initClass(1,10)" type="button" class="btn btn-primary">查询</button>
-                                </div>
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="searchCourse" class="search-self-c">科目</label>
+                                <input id="searchCourse" type="text" placeholder="请输入" class="mr-3 form-control">
+                            </div>
+                            <div class="form-group">
+                                <button onclick="reset()" type="button" class="mr-3 btn btn-secondary">重置</button>
+                                <button onclick="initCourse()" type="button" class="btn btn-primary">查询</button>
                             </div>
                         </form>
                     </div>
 
                     <div class="card-header d-flex align-items-center">
-                        <h3 class="h4 mr-4">班级列表</h3>
+                        <h3 class="h4 mr-4">科目列表</h3>
                         <button type="button" data-toggle="modal" data-target="#myModal" class="modalButton btn btn-primary">添加</button>
                         <!-- Modal-->
                         <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
@@ -44,22 +38,15 @@
                                     </div>
                                     <div class="modal-body">
                                         <form>
-                                            <input id="sid" style="display: none">
+                                            <input id="cid" style="display: none">
                                             <div class="form-group">
-                                                <label>年级</label>
-                                                <input id="grade" maxlength="20" placeholder="请输入年级" class="form-control">
+                                                <label>科目</label>
+                                                <input id="course" maxlength="20" placeholder="请输入科目" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label>班级</label>
-                                                <input id="clazz" maxlength="20" placeholder="请输入班级" class="form-control">
+                                                <label>及格分</label>
+                                                <input id="passScore" maxlength="20" placeholder="请输入及格分" class="form-control">
                                             </div>
-                                            <!--<div class="form-group row">-->
-                                                <!--<label class="col-sm-3 form-control-label">状态</label>-->
-                                                <!--<select name="account" class="form-control mb-3">-->
-                                                    <!--<option value="0">未毕业</option>-->
-                                                    <!--<option value="1">已毕业</option>-->
-                                                <!--</select>-->
-                                            <!--</div>-->
                                         </form>
                                     </div>
                                     <div class="modal-footer">
@@ -76,14 +63,13 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>年级</th>
-                                        <th>班级</th>
-                                        <th>人数</th>
-                                        <th>状态</th>
+                                        <th>科目</th>
+                                        <th>及格分</th>
+                                        <th>创建时间</th>
                                         <th>操作</th>
                                     </tr>
                                 </thead>
-                                <tbody id="studentHtml"></tbody>
+                                <tbody id="courseHtml"></tbody>
                             </table>
                         </div>
                     </div>
@@ -96,4 +82,4 @@
         </div>
     </div>
 </section>
-<script src="/module/classManager/js/classManager.js"></script>
+<script src="/module/courseManager/js/courseManager.js"></script>
