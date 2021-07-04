@@ -33,6 +33,7 @@ function getCourseList(_pageNum,_pageSize) {
     };
     ajaxPost(param, "/schoolManager/course/getCourse", function (res) {
         if (res.resCode == "0") {
+            $("#courseHtml").html("");
             var results = res.busiResp.records;
             if (results.length == 0) {
                 $("#noData").show();

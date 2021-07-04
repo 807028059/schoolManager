@@ -36,6 +36,7 @@ function getClassList(_pageNum,_pageSize) {
     };
     ajaxPost(param, "/schoolManager/clazz/getClazz", function (res) {
         if (res.resCode == "0") {
+            $("#clazzHtml").html("");
             var results = res.busiResp.records;
             if (results.length == 0) {
                 $("#noData").show();
@@ -98,7 +99,7 @@ function appendToTable(results) {
             "       <td>" + buttonHtml + "</td>" +
             "    </tr>";
     }
-    $("#studentHtml").html(html);
+    $("#clazzHtml").html(html);
 }
 
 //分页

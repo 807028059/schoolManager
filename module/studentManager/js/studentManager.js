@@ -34,6 +34,7 @@ function getStudentList(_pageNum,_pageSize) {
     };
     ajaxPost(param, "/schoolManager/student/getStudent", function (res) {
         if (res.resCode == "0") {
+            $("#studentHtml").html("");
             var results = res.busiResp.records;
             if (results.length == 0) {
                 $("#noData").show();
