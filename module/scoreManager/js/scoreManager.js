@@ -75,7 +75,7 @@ function appendToTable(results) {
             "       <td>" + results[i].exam + "</td>" +
             "       <td>" + results[i].total + "</td>" +
             "       <td>" +
-            "           <a class='oprate-button' style='color:blue' onclick='showScoreModal("+results[i].student_id+")'>修改</a>" +
+            "           <a class='oprate-button' style='color:blue' onclick='showListScoreModal("+results[i].exam_id+","+results[i].student_id+")'>修改</a>" +
             "           <a class='oprate-button' style='color:blue' onclick='delScore("+results[i].exam_id+","+results[i].student_id+")'>删除</a></td>" +
             "    </tr>";
     }
@@ -164,6 +164,13 @@ function getAllGrades() {
 //考试选项
 function selectOnExams(obj) {
     examId = obj.options[obj.selectedIndex].value;
+}
+
+
+//列表成绩弹框显示
+function showListScoreModal(_examId,_studentId) {
+    examId = _examId;
+    showScoreModal(_studentId);
 }
 
 //班级选项

@@ -5,6 +5,13 @@ $(".indexMenu li").on('click', function (e) {
     $("#bodyHtml").load($(this).attr("menu"));
 });
 
+//校验参数
+function checkParam(param) {
+    if (param == null || param == "" || param == undefined || param == "undefined") {
+        return false;
+    }
+    return true;
+}
 
 // 由映射关系获取值
 function returnMapping(objMap,keyValue,defaultValue) {
@@ -57,6 +64,67 @@ function ajaxPost(param, url, callBack) {
             swal("哦呦，出错啦", {
                 icon: "error",
             });
+        }
+    });
+}
+
+
+function initEcharts(_id,_name,_x,_y) {
+    //var LINECHART1 = $('#lineChartExample1');
+    var LINECHART1 = $('#'+_id);
+    var myLineChart = new Chart(LINECHART1, {
+        type: 'line',
+        options: {
+            scales: {
+                xAxes: [{
+                    display: true,
+                    gridLines: {
+                        display: false
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        max: 40,
+                        min: 0,
+                        stepSize: 0.5
+                    },
+                    display: false,
+                    gridLines: {
+                        display: false
+                    }
+                }]
+            },
+            legend: {
+                display: false
+            }
+        },
+        data: {
+            labels: _x,
+            datasets: [
+                {
+                    label: _name,
+                    fill: true,
+                    lineTension: 0,
+                    backgroundColor: "transparent",
+                    borderColor: '#6ccef0',
+                    pointBorderColor: '#59c2e6',
+                    pointHoverBackgroundColor: '#59c2e6',
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    borderWidth: 3,
+                    pointBackgroundColor: "#59c2e6",
+                    pointBorderWidth: 0,
+                    pointHoverRadius: 4,
+                    pointHoverBorderColor: "#fff",
+                    pointHoverBorderWidth: 0,
+                    pointRadius: 4,
+                    pointHitRadius: 0,
+                    data: _y,
+                    spanGaps: false
+                }
+            ]
         }
     });
 }

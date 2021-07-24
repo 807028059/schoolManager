@@ -97,11 +97,10 @@
                                 <div class="form-group row">
                                     <label class="search-self">年级</label>
                                     <div class="col-sm-6">
-                                        <select id="searchGrade" class="form-control mb-3"></select>
+                                        <select id="searchGrade" onchange="" class="form-control mb-3"></select>
                                     </div>
                                     <div class="form-group">
-                                        <button onclick="reset()" type="button" class="mr-3 btn btn-secondary">重置</button>
-                                        <button onclick="initClass(1,10)" type="button" class="btn btn-primary">查询</button>
+                                        <button onclick="exportGradeStudentScore()" type="button" class="btn btn-primary">导出学生成绩排名</button>
                                     </div>
                                 </div>
                             </form>

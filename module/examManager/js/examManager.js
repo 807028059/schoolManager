@@ -169,10 +169,22 @@ function showData(_id) {
     getExamGrade(_id);
 }
 
-function getEchartsData() {
-    ajaxGet("", "/schoolManager/exam/getEchartsData?examId="+_examId, function (res) {
+function getEchartsData(_grade) {
+    if(!checkParam(_grade)){
+        _grade = $("#searchGrade").val();
+    }
+    ajaxGet("", "/schoolManager/exam/getEchartsData?examId="+_examId + "&grade="+_grade, function (res) {
         if (res.resCode == "0") {
-            initEcharts();
+            var highScore = res.busiResp.highScore;
+            $("#scoreShow").html(highScore.grade+"-"+highScore.clazz+"【"+highScore.NAME+"】,总分为："+highScore.total);
+            var echartsData = res.busiResp.echartsData;
+            var _x = [];
+            var _y = [];
+            for(var i = 0;i<echartsData.length;i++){
+                _x.push(echartsData[i].clazz);
+                _y.push(echartsData[i].averageScore);
+            }
+            initEcharts("lineChartExample1","平均分",_x,_y);
         }else{
             swal(res.resMsg, {
                 icon: "error",
@@ -206,61 +218,13 @@ function getExamGrade(_id) {
     });
 }
 
-function initEcharts() {
-    var LINECHART1 = $('#lineChartExample1');
-    var myLineChart = new Chart(LINECHART1, {
-        type: 'line',
-        options: {
-            scales: {
-                xAxes: [{
-                    display: true,
-                    gridLines: {
-                        display: false
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        max: 40,
-                        min: 0,
-                        stepSize: 0.5
-                    },
-                    display: false,
-                    gridLines: {
-                        display: false
-                    }
-                }]
-            },
-            legend: {
-                display: false
-            }
-        },
-        data: {
-            labels: ["A", "B", "C", "D", "E", "F", "G"],
-            datasets: [
-                {
-                    label: "Total Overdue",
-                    fill: true,
-                    lineTension: 0,
-                    backgroundColor: "transparent",
-                    borderColor: '#6ccef0',
-                    pointBorderColor: '#59c2e6',
-                    pointHoverBackgroundColor: '#59c2e6',
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    borderWidth: 3,
-                    pointBackgroundColor: "#59c2e6",
-                    pointBorderWidth: 0,
-                    pointHoverRadius: 4,
-                    pointHoverBorderColor: "#fff",
-                    pointHoverBorderWidth: 0,
-                    pointRadius: 4,
-                    pointHitRadius: 0,
-                    data: [20, 28, 30, 22, 24, 10, 7],
-                    spanGaps: false
-                }
-            ]
-        }
-    });
+//学生排名成绩导出
+function exportGradeStudentScore() {
+    var grade = $("#searchGrade").val();
+    var url = "/schoolManager/score/exportStudentScore?examId="+_examId+"&grade="+grade;
+    var a = document.createElement('a');
+    a.href = url;
+    $('body').append(a);
+    a.click();
+    $(a).remove();
 }
