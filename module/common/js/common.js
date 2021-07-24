@@ -13,6 +13,13 @@ function checkParam(param) {
     return true;
 }
 
+function handleParam(param) {
+    if (param == null || param == "" || param == undefined || param == "undefined") {
+        return 0;
+    }
+    return param;
+}
+
 // 由映射关系获取值
 function returnMapping(objMap,keyValue,defaultValue) {
     for(var key in objMap){

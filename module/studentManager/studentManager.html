@@ -52,49 +52,6 @@
                     <div class="card-header d-flex align-items-center">
                         <h3 class="h4 mr-4">学生列表</h3>
                         <button type="button" data-toggle="modal" data-target="#myModal" class="modalButton btn btn-primary">添加</button>
-                        <!-- Modal-->
-                        <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="StudentpleModalLabel" aria-hidden="true" class="modal fade text-left">
-                            <div role="document" class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 id="StudentpleModalLabel" class="modal-title">操作</h4>
-                                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <input id="sid" style="display: none">
-                                            <div class="form-group">
-                                                <label>年级</label>
-                                                <select id="grade" class="form-control mb-3"></select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>班级</label>
-                                                <select id="clazz" class="form-control mb-3"></select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>学号</label>
-                                                <input id="num" maxlength="20" placeholder="请输入学号" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>姓名</label>
-                                                <input id="name" maxlength="20" placeholder="请输入姓名" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>性别</label>
-                                                <select id="sex" class="form-control mb-3">
-                                                    <option>男</option>
-                                                    <option>女</option>
-                                                </select>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" data-dismiss="modal" class="closeButton btn btn-secondary">关闭</button>
-                                        <button onclick="svOrUp()" type="button" class="btn btn-primary">保存</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -124,4 +81,72 @@
         </div>
     </div>
 </section>
+<!-- Modal-->
+<div id="myModal" tabindex="-1" role="dialog" aria-labelledby="StudentpleModalLabel" aria-hidden="true" class="modal fade text-left">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="StudentpleModalLabel" class="modal-title">操作</h4>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input id="sid" style="display: none">
+                    <div class="form-group">
+                        <label>年级</label>
+                        <select id="grade" class="form-control mb-3"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>班级</label>
+                        <select id="clazz" class="form-control mb-3"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>学号</label>
+                        <input id="num" maxlength="20" placeholder="请输入学号" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>姓名</label>
+                        <input id="name" maxlength="20" placeholder="请输入姓名" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>性别</label>
+                        <select id="sex" class="form-control mb-3">
+                            <option>男</option>
+                            <option>女</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="closeButton btn btn-secondary">关闭</button>
+                <button onclick="svOrUp()" type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal-->
+<div id="scoreModal" tabindex="-1" role="dialog" aria-labelledby="StudentpleModalLabel" aria-hidden="true" class="modal fade text-left">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">成绩查看</h4>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="search-self">考试</label>
+                    <div class="col-sm-8 mr-3">
+                        <select id="searchExam" onchange="selectOnExams(this)" class="form-control mb-3"></select>
+                    </div>
+                </div>
+                <div id="courseScore" class="form-group row"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="closeButton btn btn-secondary">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="/module/studentManager/js/studentManager.js"></script>

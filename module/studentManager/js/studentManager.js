@@ -8,6 +8,8 @@ $(function () {
     console.log(1)
     getSelect();
     initStudent();
+    //获取考试成绩
+    getAllExams();
 });
 
 //初始化参数
@@ -72,7 +74,7 @@ function appendToTable(results) {
             "       <td>" +
             "           <a class='oprate-button' style='color:blue' onclick='showModal("+JSON.stringify(results[i])+")'>修改</a>" +
             "           <a class='oprate-button' style='color:blue' onclick='delStudent("+results[i].id+")'>删除</a>" +
-            "           <a class='oprate-button' style='color:blue' onclick='delStudent("+results[i].id+")'>成绩查看</a>" +
+            "           <a class='oprate-button' style='color:blue' onclick='initModal("+results[i].id+")'>成绩查看</a>" +
             "       </td>" +
             "    </tr>";
     }
@@ -207,4 +209,65 @@ function delStudent(_id) {
     })
 }
 
+function initModal(_sid) {
+    $("#scoreModal").modal("show");
+    studentId = _sid;
+    getScore();
+}
 
+var studentId = "";
+//成绩查看
+function getScore() {
+    ajaxGet("", "/schoolManager/course/getScores?examId="+examId+"&studentId="+studentId, function (res) {
+        if (res.resCode == "0") {
+            var scores = res.busiResp;
+            var scoreshtml = "";
+            if (scores.length != 0) {
+                var total = 0;
+                for(var i = 0;i<scores.length;i++){
+                    scoreshtml += "<label class='col-sm-2 form-control-label'>"+scores[i].course+"</label>" +
+                                "    <div class='col-sm-8 mr-3'>" +
+                                "        <span>"+handleParam(scores[i].score)+"</span>" +
+                                "    </div>";
+                    total += handleParam(scores[i].score);
+                }
+                scoreshtml += "<label class='col-sm-2 form-control-label'>总分</label>" +
+                            "    <div class='col-sm-8 mr-3'>" +
+                            "        <span>"+total+"</span>" +
+                            "    </div>";
+                $("#courseScore").html(scoreshtml);
+            }else{
+                scoreshtml = "<div class='col-sm-8 mr-3'>" +
+                        "        <span>未参与考试</span>" +
+                        "    </div>";
+                $("#courseScore").html(scoreshtml);
+            }
+        }
+    });
+}
+
+var examId = "";
+//获取所有考试
+function getAllExams() {
+    ajaxGet("", "/schoolManager/exam/getAllExam", function (res) {
+        if (res.resCode == "0") {
+            var exams = res.busiResp;
+            var examshtml = "";
+            if (exams.length != 0) {
+                for(var i = 0;i<exams.length;i++){
+                    examshtml += "<option value='"+exams[i].id+"'>"+exams[i].exam+"</option>";
+                }
+                $("#searchExam").html(examshtml);
+                examId = exams[0].id;
+            }else{
+                $("#searchExam").html("<option>请先添加考试</option>");
+            }
+        }
+    });
+}
+
+//考试选项
+function selectOnExams(obj) {
+    examId = obj.options[obj.selectedIndex].value;
+    getScore();
+}
