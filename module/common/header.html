@@ -26,3 +26,11 @@
         </div>
     </nav>
 </header>
+<script>
+    $(function () {
+        var isLogin = localStorage.getItem("isLogin");
+        if(!isLogin){
+            window.location.href = "login.html";
+        }
+    })
+</script>

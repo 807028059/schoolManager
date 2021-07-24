@@ -87,6 +87,7 @@
         var username = $("#login-username").val();
         var password = $("#login-password").val();
         if(username == "admin" && password == "123456"){
+            localStorage.setItem("isLogin", true);
             window.location.href = "index.html";
         }else{
             alert("用户名或密码不对")
